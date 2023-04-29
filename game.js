@@ -7,61 +7,62 @@ let actions ={
     3: "scissors"
 }
 
-let computerGame= function(){
-    let randomNumber= Math.floor(Math.random() * (3) + 1);
+let computerGame = function(){
+    let randomNumber = Math.floor(Math.random() * (3) + 1);
     return randomNumber;
 }
 
 function playRound(useroption, computer){
-    let msg = ""
-    if(useroption===computer){
-        msg = `It's a tigh!`
+    if(actions[useroption] === actions[computer]){
+        return `It's a tigh!`
     }
-    else if(useroption>computer && useroption!=3){
-        msg = `You Scored. ${actions[useroption]} beats ${actions[computer]}!`
+    else if(actions[useroption] > actions[computer] && actions[useroption] != 3){
         userScore++;
+        return `You Scored. ${actions[useroption]} beats ${actions[computer]}!`
     }
-    else if(useroption==1 && computer==3){
-        msg = `You Scored. ${actions[useroption]} beats ${actions[computer]}!`
+    else if (actions[useroption] == "scissors" && actions[computer] == "paper"){
         userScore++;
+        return `You Scored. ${actions[useroption]} beats ${actions[computer]}!`
+    }
+    else if(actions[useroption] == "rock" && actions[computer] == "scissors"){
+        userScore++;
+        return  `You Scored. ${actions[useroption]} beats ${actions[computer]}!`
     }
     else{
-        msg = `You Lost. ${actions[computer]} beats ${actions[useroption]}!`
         pcScore++;
+        return  `You Lost. ${actions[computer]} beats ${actions[useroption]}!`
     }
-    return msg;
 }
 
 function checkWin(){
-    let message="";
-    if(userScore>pcScore) message = "You Won! Congrats!"
-    else if(userScore==pcScore) message = "It's tigh! Nice Try!"
-    else message="You Lost!"
-    return message;
+    if(userScore>pcScore){
+        return "You Won! Congrats!";
+    } 
+    else if(userScore==pcScore){
+        return "It's tigh! Nice Try!";
+    }
+    else{
+        return "You Lost!";
+    }
 }
 
 function game(){
     let i = 0;
     let repeat = false;
     let userInt = 0;
-    while(i<5){
+    for(let i=0;i<5;i++){
        do{
           let userInput = prompt("Please type Rock,Paper,Or scissors to start the game:");
-          for(let x=1;x<4;x++){
-            if(userInput.toLocaleLowerCase() == actions[x]){
-                userInt = x;
-                repeat = false;
-                break;
-            }
+          if(userInput == "rock" || userInput == "scissors" || userInput == "paper"){
+            repeat = false;
           }
-          if(userInt == 0){
+          else{
             repeat = true;
             console.log("Wrong Input, Please try again!")
           }
        }while(repeat)
        let pc = computerGame();
-       let res = playRound(userInt,pc);
-       console.log(res);
+       console.log(playRound(userInt,pc));
        if(res !="It's a tigh!") i++;
     }
     console.log(checkWin());
