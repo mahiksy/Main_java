@@ -45,10 +45,8 @@ function game(){
     let repeat = false;
     let userInt = 0;
     while(i<5){
-        
        do{
-          let userInput = prompt("Please type Rock,Paper,Or scissors to start the game:")
-          
+          let userInput = prompt("Please type Rock,Paper,Or scissors to start the game:");
           for(let x=1;x<4;x++){
             if(userInput.toLocaleLowerCase() == actions[x]){
                 userInt = x;
@@ -64,7 +62,7 @@ function game(){
        let pc = computerGame();
        let res = playRound(userInt,pc);
        console.log(res);
-       if(res != "It's a tigh!") i++;
+       if(res !="It's a tigh!") i++;
     }
     console.log(checkWin());
 }
