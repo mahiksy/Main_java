@@ -1,4 +1,5 @@
-+let userScore=0;
+let userScore=0;
+let useroption=0;
 let pcScore=0;
 let actions={
     1: "rock",
